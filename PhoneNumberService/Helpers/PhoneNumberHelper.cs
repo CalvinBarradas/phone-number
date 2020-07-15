@@ -59,6 +59,15 @@ namespace PhoneNumberService.Helpers
 
             string formatPattern = null;
 
+            for (int i = _regexNumberFormatArray.Count - 1; i >= 0; i--)
+            {
+                if (Regex.IsMatch(phoneNumber, _regexNumberFormatArray[i].Item1))
+                {
+                    formatPattern = _regexNumberFormatArray[i].Item2;
+                    break;
+                }
+            }
+
             _regexNumberFormatArray.ForEach(item =>
             {
                 if (Regex.IsMatch(phoneNumber, item.Item1))
